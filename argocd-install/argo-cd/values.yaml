@@ -375,8 +375,8 @@ server:
 
   ## Additional command line arguments to pass to argocd-server
   ##
-  extraArgs: []
-  #  - --insecure
+  extraArgs:
+   - --insecure
 
   ## Environment variables to pass to argocd-server
   ##
@@ -451,9 +451,11 @@ server:
 
   ## Certificate configuration
   certificate:
-    enabled: false
+    enabled: true
     domain: argocd.kian.sh
-    issuer: {}
+    issuer: 
+      name: letsencrypt-prod
+      kind: ClusterIssuer
     additionalHosts: []
 
   ## Server service configuration
@@ -551,6 +553,11 @@ server:
       #   hosts:
       #     - argocd.example.com
     https: false
+
+  ingressRoute:
+    enabled: false
+    hosts: 
+      - argocd.kian.sh
 
   # Create a OpenShift Route with SSL passthrough for UI and CLI
   # Consider setting 'hostname' e.g. https://argocd.apps-crc.testing/ using your Default Ingress Controller Domain
