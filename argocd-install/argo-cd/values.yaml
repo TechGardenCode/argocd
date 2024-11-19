@@ -452,7 +452,7 @@ server:
   ## Certificate configuration
   certificate:
     enabled: false
-    domain: argocd.example.com
+    domain: argocd.kian.sh
     issuer: {}
     additionalHosts: []
 
@@ -460,7 +460,7 @@ server:
   service:
     annotations: {}
     labels: {}
-    type: ClusterIP
+    type: LoadBalancer
     ## For node port default ports
     nodePortHttp: 30080
     nodePortHttps: 30443
