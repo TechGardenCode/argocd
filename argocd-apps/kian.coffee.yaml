@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kian-coffee
+  name: coffee-kian
   namespace: argocd
 spec:
   destination:
-    namespace: kian-coffee
+    namespace: coffee-kian
     server: https://kubernetes.default.svc
   project: default
   source:
