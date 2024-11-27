@@ -525,18 +525,17 @@ server:
   # dedicated ingess for gRPC as documented at
   # https://argoproj.github.io/argo-cd/operator-manual/ingress/
   ingressGrpc:
-    enabled: false
+    enabled: true
     annotations: {}
     labels: {}
-    ingressClassName: ""
+    ingressClassName: "nginx"
 
     ## Argo Ingress.
     ## Hostnames must be provided if Ingress is enabled.
     ## Secrets must be manually created in the namespace
     ##
     hosts:
-      []
-      # - argocd.example.com
+      - grpc.argocd.local.dev.techgarden.gg
     paths:
       - /
     extraPaths:
@@ -546,10 +545,9 @@ server:
       #     serviceName: ssl-redirect
       #     servicePort: use-annotation
     tls:
-      []
-      # - secretName: argocd-example-tls
-      #   hosts:
-      #     - argocd.example.com
+      - secretName: grpc-argocd-local-dev-techgarden-gg-tls
+        hosts:
+          - grpc.argocd.local.dev.techgarden.gg
     https: false
 
   # Create a OpenShift Route with SSL passthrough for UI and CLI
