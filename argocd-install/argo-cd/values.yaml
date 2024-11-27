@@ -451,8 +451,8 @@ server:
 
   ## Certificate configuration
   certificate:
-    enabled: true
-    domain: argocd.kian.sh
+    enabled: false
+    domain: argocd.local.dev.techgarden.gg
     issuer: 
       name: letsencrypt-prod
       kind: ClusterIssuer
@@ -498,18 +498,17 @@ server:
     automountServiceAccountToken: true
 
   ingress:
-    enabled: false
+    enabled: true
     annotations: {}
     labels: {}
-    ingressClassName: ""
+    ingressClassName: "nginx"
 
     ## Argo Ingress.
     ## Hostnames must be provided if Ingress is enabled.
     ## Secrets must be manually created in the namespace
     ##
     hosts:
-      []
-      # - argocd.example.com
+      - argocd.local.dev.techgarden.gg
     paths:
       - /
     extraPaths:
@@ -519,10 +518,9 @@ server:
       #     serviceName: ssl-redirect
       #     servicePort: use-annotation
     tls:
-      []
-      # - secretName: argocd-example-tls
-      #   hosts:
-      #     - argocd.example.com
+      - secretName: argocd-local-dev-techgarden-gg-tls
+        hosts:
+          - argocd.local.dev.techgarden.gg
     https: false
   # dedicated ingess for gRPC as documented at
   # https://argoproj.github.io/argo-cd/operator-manual/ingress/
@@ -554,11 +552,6 @@ server:
       #     - argocd.example.com
     https: false
 
-  ingressRoute:
-    enabled: false
-    hosts: 
-      - argocd.kian.sh
-
   # Create a OpenShift Route with SSL passthrough for UI and CLI
   # Consider setting 'hostname' e.g. https://argocd.apps-crc.testing/ using your Default Ingress Controller Domain
   # Find your domain with: kubectl describe --namespace=openshift-ingress-operator ingresscontroller/default | grep Domain:
@@ -572,7 +565,7 @@ server:
   configEnabled: true
   config:
     # Argo CD's externally facing base URL (optional). Required when configuring SSO
-    url: https://argocd.kian.sh
+    url: https://argocd.local.dev.techgarden.gg/
     # Argo CD instance label key
     application.instanceLabelKey: argocd.argoproj.io/instance
     # repositories: |
